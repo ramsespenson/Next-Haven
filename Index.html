@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Haven</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Montserrat:wght@700&family=Roboto:wght@400;500&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" onclick="showPage('home')">Next Haven</div>
+            <ul>
+                <li><a href="index.html" class="active" onclick="showPage('home')">Home</a></li>
+                <li><a href="#items" onclick="showPage('items')">Items for Sale</a></li>
+                <li><a href="#wishlist" onclick="showPage('wishlist')">Wishlist</a></li>
+                <li><a href="#inquiry" onclick="showPage('inquiry')">Inquiry Form</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- Homepage -->
+        <section id="home">
+            <div class="hero-section">
+                <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1600&q=80" alt="Furniture Hero" class="hero-img">
+                <div class="hero-overlay">
+                    <h1>Welcome to Next Haven</h1>
+                    <p>Quality Student Furniture, Affordable Prices.</p>
+                    <button class="cta-btn" onclick="showPage('items')">Browse Items</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Items for Sale Page -->
+        <section id="items" class="hidden">
+            <h2>Items for Sale</h2>
+            <div class="search-filter-bar">
+                <form id="searchForm" autocomplete="off" onsubmit="return false;">
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search items..."
+                        aria-label="Search items"
+                    >
+                    <button type="button" id="searchBtn">
+                        <span class="search-icon">&#128269;</span>
+                    </button>
+                </form>
+                <div class="filter-buttons">
+                    <button type="button" id="sortLowHigh" class="filter-btn">Price: Low → High</button>
+                    <button type="button" id="sortHighLow" class="filter-btn">Price: High → Low</button>
+                    <span>Condition:</span>
+                    <button type="button" class="filter-btn" data-condition="All">All</button>
+                    <button type="button" class="filter-btn" data-condition="Like New">Like New</button>
+                    <button type="button" class="filter-btn" data-condition="Good">Good</button>
+                    <button type="button" class="filter-btn" data-condition="Fair">Fair</button>
+                </div>
+            </div>
+            <div class="grid" id="productGrid">
+                <!-- Products will be rendered by script.js -->
+            </div>
+            <div id="noItemsFound" class="empty-message hidden">No items found.</div>
+        </section>
+
+        <!-- Wishlist Page -->
+        <section id="wishlist" class="hidden">
+            <h2>Your Wishlist</h2>
+            <div id="wishlistGrid" class="grid">
+                <!-- Wishlist items will be rendered by script.js -->
+            </div>
+            <div id="emptyWishlist" class="empty-message">Your wishlist is empty.</div>
+        </section>
+
+        <!-- Inquiry Form Page -->
+        <section id="inquiry" class="hidden">
+            <h2>Inquiry Form</h2>
+            <form id="inquiryForm" class="inquiry-form">
+                <label>
+                    Name:
+                    <input type="text" name="name" required>
+                </label>
+                <label>
+                    Email:
+                    <input type="email" name="email" required>
+                </label>
+                <label>
+                    Message:
+                    <textarea name="message" rows="3" required></textarea>
+                </label>
+                <label>
+                    What would you like to do?
+                    <select name="action" id="actionSelect" required onchange="toggleInquiryFields()">
+                        <option value="">Select an option</option>
+                        <option value="buy">Buy an item</option>
+                        <option value="sell">Sell an item</option>
+                    </select>
+                </label>
+                <div id="buyField" class="hidden">
+                    <label>
+                        Choose Item:
+                        <select name="buyItem" id="buyItemDropdown">
+                            <option value="">Select item</option>
+                            <!-- Items will be populated by script.js -->
+                        </select>
+                    </label>
+                </div>
+                <div id="sellField" class="hidden">
+                    <label>
+                        Describe What You Want to Sell:
+                        <input type="text" name="sellDescription" placeholder="e.g. Twin Bed Frame, excellent condition">
+                    </label>
+                </div>
+                <button type="submit" class="cta-btn">Submit Inquiry</button>
+            </form>
+            <div id="confirmationMessage" class="hidden"></div>
+        </section>
+    </main>
+
+    <!-- Product Details Modal -->
+    <div id="productModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close" id="modalCloseBtn">&times;</button>
+            <img id="modalProductImg" src="" alt="Product" class="modal-img">
+            <h3 id="modalProductName"></h3>
+            <div class="modal-details">
+                <div id="modalProductBrand" class="modal-detail"></div>
+                <div id="modalProductCondition" class="modal-detail"></div>
+                <div id="modalProductPrice" class="modal-price"></div>
+            </div>
+            <p id="modalProductDesc"></p>
+            <button id="modalWishlistBtn" class="modal-wishlist-btn">Add to Wishlist</button>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Next Haven. All rights reserved.
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
